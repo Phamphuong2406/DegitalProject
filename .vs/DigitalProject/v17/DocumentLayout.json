@@ -1,10 +1,66 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\admin\\source\\repos\\DigitalProject\\",
+  "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\digitalproject\\digitalproject\\services\\implements\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\controllers\\admin\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\controllers\\admin\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\services\\interface\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\services\\interface\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\repositories\\interface\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\repositories\\interface\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\repositories\\implements\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\repositories\\implements\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\services\\implements\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\services\\implements\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\models\\user\\userrequestdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\models\\user\\userrequestdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\entitys\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\entitys\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\models\\user\\userresponsedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\models\\user\\userresponsedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Migrations\\20250717153215_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DigitalProject\\Migrations\\20250717153215_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\entitys\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\entitys\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\entitys\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\entitys\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\entitys\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\entitys\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|c:\\users\\admin\\source\\repos\\degitalproject\\digitalproject\\digitalproject.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{C2275B4E-E121-4C10-A38D-15A6E5A8F9AC}|DigitalProject\\DigitalProject.csproj|solutionrelative:digitalproject\\digitalproject.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +70,201 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Services\\Interface\\IUserService.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Services\\Interface\\IUserService.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Services\\Interface\\IUserService.cs",
+              "RelativeToolTip": "DigitalProject\\Services\\Interface\\IUserService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T16:23:08.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Repositories\\Interface\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Repositories\\Interface\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Repositories\\Interface\\IUserRepository.cs",
+              "RelativeToolTip": "DigitalProject\\Repositories\\Interface\\IUserRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T16:06:30.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Repositories\\Implements\\UserRepository.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Repositories\\Implements\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Repositories\\Implements\\UserRepository.cs",
+              "RelativeToolTip": "DigitalProject\\Repositories\\Implements\\UserRepository.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAYwCUAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T16:04:17.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\DigitalProject\\DigitalProject\\Services\\Implements\\UserService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Services\\Implements\\UserService.cs",
               "RelativeDocumentMoniker": "DigitalProject\\Services\\Implements\\UserService.cs",
-              "ToolTip": "C:\\Users\\admin\\source\\repos\\DigitalProject\\DigitalProject\\Services\\Implements\\UserService.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Services\\Implements\\UserService.cs",
               "RelativeToolTip": "DigitalProject\\Services\\Implements\\UserService.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBoAAAAdAAAAAAAAAA==",
+              "ViewState": "AQIAACwAAAAAAAAAAAAkwDEAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T10:24:04.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserManagementController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Controllers\\Admin\\UserManagementController.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Controllers\\Admin\\UserManagementController.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Controllers\\Admin\\UserManagementController.cs",
+              "RelativeToolTip": "DigitalProject\\Controllers\\Admin\\UserManagementController.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAAgwD8AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T15:24:22.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserRequestData.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Models\\User\\UserRequestData.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Models\\User\\UserRequestData.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Models\\User\\UserRequestData.cs",
+              "RelativeToolTip": "DigitalProject\\Models\\User\\UserRequestData.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T16:11:02.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Entitys\\User.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Entitys\\User.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Entitys\\User.cs",
+              "RelativeToolTip": "DigitalProject\\Entitys\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T15:30:18.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserResponseData.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Models\\User\\UserResponseData.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Models\\User\\UserResponseData.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Models\\User\\UserResponseData.cs",
+              "RelativeToolTip": "DigitalProject\\Models\\User\\UserResponseData.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T16:11:03.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserRole.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Entitys\\UserRole.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Entitys\\UserRole.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Entitys\\UserRole.cs",
+              "RelativeToolTip": "DigitalProject\\Entitys\\UserRole.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T15:30:25.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Entitys\\Role.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Entitys\\Role.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Entitys\\Role.cs",
+              "RelativeToolTip": "DigitalProject\\Entitys\\Role.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T15:30:27.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MyDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Entitys\\MyDbContext.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Entitys\\MyDbContext.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Entitys\\MyDbContext.cs",
+              "RelativeToolTip": "DigitalProject\\Entitys\\MyDbContext.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAowEIAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T15:30:29.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\appsettings.json",
+              "RelativeDocumentMoniker": "DigitalProject\\appsettings.json",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\appsettings.json",
+              "RelativeToolTip": "DigitalProject\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-17T15:23:16.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Program.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Program.cs",
+              "RelativeToolTip": "DigitalProject\\Program.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAawA8AAABHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T15:18:09.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20250717153215_1.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Migrations\\20250717153215_1.cs",
+              "RelativeDocumentMoniker": "DigitalProject\\Migrations\\20250717153215_1.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\Migrations\\20250717153215_1.cs",
+              "RelativeToolTip": "DigitalProject\\Migrations\\20250717153215_1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T15:32:15.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DigitalProject.http",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\DigitalProject.http",
+              "RelativeDocumentMoniker": "DigitalProject\\DigitalProject.http",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\DegitalProject\\DigitalProject\\DigitalProject.http",
+              "RelativeToolTip": "DigitalProject\\DigitalProject.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-07-17T15:18:08.336Z",
               "EditorCaption": ""
             }
           ]

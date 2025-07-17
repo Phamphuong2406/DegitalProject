@@ -13,10 +13,20 @@ namespace DigitalProject.Controllers.Admin
         public UserManagementController(IUserService userService)
         {
             _userService = userService;
-  
+
+        }
+        [HttpGet("{id}")]
+
+        public IActionResult GetByUserId(int id)
+        {
+            var user = _userService.getByUserId(id);
+            if (user == null) {
+                return NotFound("Người dùng không tồn tại");
+            }
+            return Ok(user);
         }
         [HttpPost]
-        public IActionResult CreateUser([FromForm] UserRequestData requestData)
+        public IActionResult CreateUser(UserRequestData requestData)
         {
             var responseData = new ResponseData();
             try
@@ -33,7 +43,7 @@ namespace DigitalProject.Controllers.Admin
                 }
                 responseData.Message = "Tạo tài khoản thành công";
 
-                return Ok();
+                return Ok(responseData);
             }
             catch (Exception ex)
             {
@@ -42,6 +52,15 @@ namespace DigitalProject.Controllers.Admin
             }
 
 
+        }
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(UserRequestData dto, int id)
+        {
+            var success = _userService.EditUser(dto, id);
+            if (!success)
+                return NotFound("Không tìm thấy người dùng");
+
+            return Ok("Cập nhật người dùng thành công");
         }
 
     }

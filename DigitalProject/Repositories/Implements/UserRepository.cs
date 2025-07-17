@@ -16,7 +16,7 @@ namespace DigitalProject.Repositories.Implements
             _context.users.Add(model);
             _context.SaveChanges();
         }
-        public bool GetByUserId(string email)
+        public bool GetByEmail(string email)
         {
             var user = _context.users.FirstOrDefault(x => x.Email == email);
             if (user == null)
@@ -25,5 +25,22 @@ namespace DigitalProject.Repositories.Implements
             }
             return true;
         }
+        public User GetUserById(int id)
+        {
+            return _context.users.FirstOrDefault(x => x.UserId == id);
+
+        }
+        public bool EditUser(User model)
+        {
+
+            _context.users.Update(model);
+           var result= _context.SaveChanges();
+            return result > 0;
+        }
+        public void DeleteUser(int id)
+        {
+
+        }
+
     }
 }
