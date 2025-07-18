@@ -12,6 +12,7 @@ namespace DigitalProject.Entitys
         public virtual DbSet<User> users { get; set; }
         public virtual DbSet<Role> roles { get; set; }
         public virtual DbSet<UserRole> userRoles { get; set; }
+        public virtual DbSet<Project> projects { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)// Fluent API (Application Programming Interface)
 
         {
@@ -59,6 +60,10 @@ namespace DigitalProject.Entitys
                       .WithOne(ur => ur.users)
                       .HasForeignKey(ur => ur.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(u => u.projects)
+          .WithOne(p => p.users)
+          .HasForeignKey(p => p.IdPoster)        // khóa ngoại bên Project
+          .HasPrincipalKey(u => u.UserId);       // khóa chính bên User
             });
 
             // Role
@@ -93,7 +98,28 @@ namespace DigitalProject.Entitys
                       .WithMany(r => r.userRoles)
                       .HasForeignKey(ur => ur.RoleId);
             });
+            modelBuilder.Entity<Project>(entity =>
+            {
+                entity.ToTable("Projects");
+                entity.HasKey(r => r.ProjectId);  
+             
 
+                entity.Property( u => u.ProjectName )
+                .IsRequired()
+                .HasMaxLength(255);
+                entity.Property( u => u.ProjectType )
+                .HasMaxLength(255);
+                entity.Property( u => u.ImageUrl)
+                .HasMaxLength(255);
+                entity.Property( u => u.Shortdescription)
+                .HasMaxLength(500);
+                entity.Property( u => u.DetailedDescription)
+                .IsRequired();
+                entity.Property( u => u.architect )
+                .HasMaxLength(100);
+                entity.Property( u => u.structuralEngineer)
+                .HasMaxLength(100);
+            }); 
         }
     }
 }

@@ -11,4 +11,9 @@
         public bool IsActive { get; set; }
         public string? note { get; set; }
     }
+    public class AccountLoginRequestData
+    {
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+    }
 }

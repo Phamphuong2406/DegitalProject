@@ -11,24 +11,51 @@ namespace DigitalProject.Repositories.Implements
         {
             _context = context;
         }
+        public List<User> getListUser()
+        {
+            return _context.users.Select( x => new User
+            {
+                UserId = x.UserId,
+                UserName = x.UserName,
+                Email = x.Email,
+                IsActive = x.IsActive,
+                FullName = x.FullName,
+                note = x.note,
+                PhoneNumber = x.PhoneNumber,
+            }).ToList();
+        }
         public void AddUser(User model)
         {
             _context.users.Add(model);
             _context.SaveChanges();
         }
-        public bool GetByEmail(string email)
+        public User GetByEmail(string email)
         {
             var user = _context.users.FirstOrDefault(x => x.Email == email);
             if (user == null)
             {
-                return false;
+                return null;
             }
-            return true;
+            return user;
         }
         public User GetUserById(int id)
         {
-            return _context.users.FirstOrDefault(x => x.UserId == id);
-
+            var user = _context.users
+                .Select( x=> new User
+                {
+                    UserId = x.UserId,
+                    UserName = x.UserName,
+                    Email = x.Email,
+                    IsActive = x.IsActive,
+                    FullName = x.FullName,
+                    note = x.note,
+                    PhoneNumber = x.PhoneNumber,
+                })
+                .FirstOrDefault(x => x.UserId == id);
+            if (user == null) {
+                return null;
+            }
+            return user;
         }
         public bool EditUser(User model)
         {
@@ -37,9 +64,38 @@ namespace DigitalProject.Repositories.Implements
            var result= _context.SaveChanges();
             return result > 0;
         }
-        public void DeleteUser(int id)
+        public void DeleteUser(User model)
         {
+            _context.users.Remove(model);
+            _context.SaveChanges();
+        }
+        public List<User> GetUserByKey(string? key, bool IsActive)
+        {
+            var query = _context.users.Where(x => x.IsActive == IsActive);
 
+            if (!string.IsNullOrEmpty(key))
+            {
+                query = query.Where(x => x.UserName.Contains(key) || x.Email.Contains(key));
+            }
+
+            return query.Select( x=> new User
+            {
+                UserId = x.UserId,
+                UserName = x.UserName,
+                Email = x.Email,
+                IsActive = x.IsActive,
+                FullName = x.FullName,
+                note = x.note,
+                PhoneNumber = x.PhoneNumber,
+            }
+            
+            ).ToList();
+        }
+        public bool UpdateRefreshToken(User model)
+        {
+            _context.users.Update(model);
+            var result = _context.SaveChanges();
+            return result > 0;
         }
 
     }

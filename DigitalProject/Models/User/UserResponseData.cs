@@ -16,4 +16,17 @@
     { 
         public string Message { get; set; } 
     }
+    public class DataReturnedAfterLogin
+    {
+        public int ResponseCode { get; set; } //mã lỗi
+        public string ResponseMessage { get; set; } // thông báo lỗi
+        public string token { get; set; }
+        public string? refeshToken { get; set; }
+    }
+    public class AccountUpdateRefeshTokenRequestData 
+    {
+        public int Id { get; set; }
+        public string? RefreshToken { get; set; } = null!;
+        public DateTime? RefreshTokenExprired { get; set; }
+    }
 }
