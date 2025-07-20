@@ -1,4 +1,4 @@
-﻿using DigitalProject.Common.AutoMapper;
+﻿
 using DigitalProject.Entitys;
 using DigitalProject.Repositories.Implements;
 using DigitalProject.Repositories.Interface;
@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 using AutoMapper;
+using DigitalProject.Common.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,7 @@ builder.Services.AddDbContext<MyDbContext>(options =>
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     )
 );
-//builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

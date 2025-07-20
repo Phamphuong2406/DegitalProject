@@ -142,7 +142,8 @@ namespace DigitalProject.Migrations
                         .HasColumnType("varchar(500)");
 
                     b.Property<DateTime?>("RefreshTokenExpired")
-                        .HasColumnType("datetime");
+                        .HasMaxLength(100)
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserName")
                         .IsRequired()

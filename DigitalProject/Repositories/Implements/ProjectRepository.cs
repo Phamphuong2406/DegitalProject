@@ -13,6 +13,29 @@ namespace DigitalProject.Repositories.Implements
             _context = context;
 
         }
+        public List<Project> getListProject()
+        {
+            return _context.projects.Select(x => new Project
+            {
+                ProjectId = x.ProjectId,
+                ProjectName = x.ProjectName,
+                ProjectType = x.ProjectType,
+                ImageUrl = x.ImageUrl,
+                Shortdescription = x.Shortdescription,
+                DetailedDescription = x.DetailedDescription,
+                architect = x.architect,
+                structuralEngineer = x.structuralEngineer,
+                ConstructionEndTime = x.ConstructionEndTime,
+                ConstructionStartTime = x.ConstructionStartTime,
+                PostedTime = x.PostedTime,
+                DisplayOnHeader = x.DisplayOnHeader,
+                DisplayOnhome = x.DisplayOnhome,
+                DisplayOrderOnHeader = x.DisplayOrderOnHeader,
+                DisplayOrderOnHome = x.DisplayOrderOnHome,
+                ExpirationTimeOnHeader = x.ExpirationTimeOnHeader,
+                IdPoster = x.IdPoster,
+            }).ToList();
+        }
         public Project GetProjectById(int projectId)
         {
             var project = _context.projects.FirstOrDefault(x => x.ProjectId == projectId);
@@ -26,10 +49,15 @@ namespace DigitalProject.Repositories.Implements
         }
         public void CreateProject(Project project)
         {
-            project.PostedTime = DateTime.Now;
             _context.projects.Add(project);
             _context.SaveChanges();
 
         }
+        public void DeleteProject(Project model)
+        {
+            _context.projects.Remove(model);
+            _context.SaveChanges();
+        }
+
     }
 }

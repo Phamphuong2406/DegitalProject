@@ -58,12 +58,13 @@ namespace DigitalProject.Entitys
                 // Quan hệ 1-nhiều: User → UserRole
                 entity.HasMany(u => u.userRoles)
                       .WithOne(ur => ur.users)
-                      .HasForeignKey(ur => ur.UserId)
+                      .HasForeignKey(ur => ur.UserId)// khóa n
                       .OnDelete(DeleteBehavior.Cascade);
                 entity.HasMany(u => u.projects)
-          .WithOne(p => p.users)
-          .HasForeignKey(p => p.IdPoster)        // khóa ngoại bên Project
-          .HasPrincipalKey(u => u.UserId);       // khóa chính bên User
+                .WithOne(ur => ur.users)
+                .HasForeignKey(u => u.IdPoster)
+                .OnDelete(DeleteBehavior.Cascade);
+
             });
 
             // Role
@@ -77,10 +78,11 @@ namespace DigitalProject.Entitys
                       .IsRequired()
                       .HasMaxLength(50);
 
-                entity.HasMany(r => r.userRoles)
+                entity.HasMany(r => r.userRoles)// quan hệ 1-n với bảng userrole
                       .WithOne(ur => ur.roles)
-                      .HasForeignKey(ur => ur.RoleId)
+                      .HasForeignKey(ur => ur.RoleId)// với khóa ngoại là RoleId
                       .OnDelete(DeleteBehavior.Cascade);
+
             });
 
             // UserRole: bảng trung gian many-to-many
@@ -94,32 +96,34 @@ namespace DigitalProject.Entitys
                       .WithMany(u => u.userRoles)
                       .HasForeignKey(ur => ur.UserId);
 
-                entity.HasOne(ur => ur.roles)
+                entity.HasOne(ur => ur.roles)// quan hệ n-1 với bảng roles với khóa ngoại lấy từ bảng role là RoleId
                       .WithMany(r => r.userRoles)
-                      .HasForeignKey(ur => ur.RoleId);
+                      .HasForeignKey(ur => ur.RoleId);//UserRole trỏ về Role qua khóa ngoại RoleId.
             });
             modelBuilder.Entity<Project>(entity =>
             {
                 entity.ToTable("Projects");
-                entity.HasKey(r => r.ProjectId);  
-             
+                entity.HasKey(r => r.ProjectId);
 
-                entity.Property( u => u.ProjectName )
+
+                entity.Property(u => u.ProjectName)
                 .IsRequired()
                 .HasMaxLength(255);
-                entity.Property( u => u.ProjectType )
+                entity.Property(u => u.ProjectType)
                 .HasMaxLength(255);
-                entity.Property( u => u.ImageUrl)
+                entity.Property(u => u.ImageUrl)
                 .HasMaxLength(255);
-                entity.Property( u => u.Shortdescription)
+                entity.Property(u => u.Shortdescription)
                 .HasMaxLength(500);
-                entity.Property( u => u.DetailedDescription)
+                entity.Property(u => u.DetailedDescription)
                 .IsRequired();
-                entity.Property( u => u.architect )
+                entity.Property(u => u.architect)
                 .HasMaxLength(100);
-                entity.Property( u => u.structuralEngineer)
+                entity.Property(u => u.structuralEngineer)
                 .HasMaxLength(100);
-            }); 
+
+
+            });
         }
     }
 }

@@ -13,7 +13,21 @@ namespace DigitalProject.Services.Implements
 
             _projectRepo = projectRepo;
         }
-        public bool AddProject(ProjectDTO model)
+        public List<Project> GetListProject()
+        {
+            return _projectRepo.getListProject();
+        }
+        public Project getByProjectId(int projectId)
+        {
+            var project = _projectRepo.GetProjectById(projectId);
+            if (project == null)
+            {
+                return null;
+            }
+            return project;
+        }
+        
+        public bool AddProject(ProjectDTO model,int  currentUserId)
         {
             try
             {
@@ -33,13 +47,13 @@ namespace DigitalProject.Services.Implements
                     structuralEngineer = model.structuralEngineer,
                     ConstructionEndTime = model.ConstructionEndTime,
                     ConstructionStartTime = model.ConstructionStartTime,
-                    PostedTime = model.PostedTime,
+                    PostedTime = DateTime.Now,
                     DisplayOnHeader = model.DisplayOnHeader,
                     DisplayOnhome = model.DisplayOnhome,
                     DisplayOrderOnHeader = model.DisplayOrderOnHeader,
                     DisplayOrderOnHome = model.DisplayOrderOnHome,
                     ExpirationTimeOnHeader = model.ExpirationTimeOnHeader,
-                    IdPoster = model.IdPoster,
+                    IdPoster = currentUserId,
                 };
                 _projectRepo.CreateProject(project);
                 return true;
@@ -50,6 +64,14 @@ namespace DigitalProject.Services.Implements
                 throw;
             }
 
+        }
+
+        public bool DeleteProject(int projectId)
+        {
+            var project = _projectRepo.GetProjectById(projectId);
+            if (project == null) return false;
+            _projectRepo.DeleteProject(project);
+            return true;
         }
     }
 }

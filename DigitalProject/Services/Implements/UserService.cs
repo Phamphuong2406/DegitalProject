@@ -75,16 +75,17 @@ namespace DigitalProject.Services.Implements
             user.HashedPassword = BCrypt.Net.BCrypt.HashPassword(Dto.Password);
             return _userRepo.EditUser(user);
         }
-        public bool DeleteUser(int userId) {
+        public bool DeleteUser(int userId)
+        {
             var user = _userRepo.GetUserById(userId);
             if (user == null) return false;
             _userRepo.DeleteUser(user);
             return true;
         }
-        public List<User> GetByKeyword(string? key , bool isActive)
+        public List<User> GetByKeyword(string? key, bool isActive)
         {
             key = string.IsNullOrEmpty(key) ? "" : key.ToLower();
-           var users =  _userRepo.GetUserByKey(key,isActive);
+            var users = _userRepo.GetUserByKey(key, isActive);
             return users;
 
         }
@@ -96,9 +97,10 @@ namespace DigitalProject.Services.Implements
                 var user_db = _userRepo.GetByEmail(data.Email);
                 if (user_db == null) return null;
                 bool isPasswordMatch = BCrypt.Net.BCrypt.Verify(data.Password, user_db.HashedPassword);
-                if (!isPasswordMatch) {
+                if (!isPasswordMatch)
+                {
                     return null;
-                
+
                 }
                 user.UserId = user_db.UserId;
                 user.UserName = user_db.UserName;
@@ -121,8 +123,10 @@ namespace DigitalProject.Services.Implements
                 var user = _userRepo.GetUserById(tokenRequestData.Id);
                 if (user != null)
                 {
+                   
                     user.RefreshToken = tokenRequestData.RefreshToken;
-                  user.RefreshTokenExpired = tokenRequestData.RefreshTokenExprired;
+                    user.RefreshTokenExpired = tokenRequestData.RefreshTokenExprired;
+                  
                     _userRepo.UpdateRefreshToken(user);
                     return true;
                 }
