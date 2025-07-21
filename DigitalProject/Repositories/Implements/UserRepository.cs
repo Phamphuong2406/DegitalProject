@@ -13,16 +13,7 @@ namespace DigitalProject.Repositories.Implements
         }
         public List<User> getListUser()
         {
-            return _context.users.Select( x => new User
-            {
-                UserId = x.UserId,
-                UserName = x.UserName,
-                Email = x.Email,
-                IsActive = x.IsActive,
-                FullName = x.FullName,
-                note = x.note,
-                PhoneNumber = x.PhoneNumber,
-            }).ToList();
+            return _context.users.ToList();
         }
         public void AddUser(User model)
         {
@@ -40,18 +31,7 @@ namespace DigitalProject.Repositories.Implements
         }
         public User GetUserById(int id)
         {
-            var user = _context.users
-                .Select( x=> new User
-                {
-                    UserId = x.UserId,
-                    UserName = x.UserName,
-                    Email = x.Email,
-                    IsActive = x.IsActive,
-                    FullName = x.FullName,
-                    note = x.note,
-                    PhoneNumber = x.PhoneNumber,
-                })
-                .FirstOrDefault(x => x.UserId == id);
+            var user = _context.users.FirstOrDefault(x => x.UserId == id);
             if (user == null) {
                 return null;
             }

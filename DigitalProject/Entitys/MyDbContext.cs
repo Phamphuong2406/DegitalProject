@@ -13,6 +13,7 @@ namespace DigitalProject.Entitys
         public virtual DbSet<Role> roles { get; set; }
         public virtual DbSet<UserRole> userRoles { get; set; }
         public virtual DbSet<Project> projects { get; set; }
+        public virtual DbSet<Gallery> galleries { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)// Fluent API (Application Programming Interface)
 
         {
@@ -60,10 +61,16 @@ namespace DigitalProject.Entitys
                       .WithOne(ur => ur.users)
                       .HasForeignKey(ur => ur.UserId)// khóa n
                       .OnDelete(DeleteBehavior.Cascade);
+
                 entity.HasMany(u => u.projects)
                 .WithOne(ur => ur.users)
                 .HasForeignKey(u => u.IdPoster)
                 .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(u => u.galleries)
+                    .WithOne(ur => ur.users)
+                    .HasForeignKey(ur => ur.PosterId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
             });
 
@@ -123,6 +130,18 @@ namespace DigitalProject.Entitys
                 .HasMaxLength(100);
 
 
+            });
+
+            modelBuilder.Entity<Gallery>(entity =>
+            {
+                entity.ToTable("Gallerys");
+                entity.HasKey(r => r.PalleryId);
+
+                entity.Property(u => u.GalleryName)
+               .IsRequired()
+               .HasMaxLength(255);
+                entity.Property(u => u.Address)
+                .HasMaxLength(255);
             });
         }
     }

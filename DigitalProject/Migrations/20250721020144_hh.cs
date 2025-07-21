@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DigitalProject.Migrations
 {
     /// <inheritdoc />
-    public partial class _11 : Migration
+    public partial class hh : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

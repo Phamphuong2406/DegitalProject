@@ -1,4 +1,5 @@
 ﻿using DigitalProject.Common.Filter;
+using DigitalProject.Models.User;
 using DigitalProject.Models.User.Project;
 using DigitalProject.Services.Implements;
 using DigitalProject.Services.Interface;
@@ -32,7 +33,7 @@ namespace DigitalProject.Controllers.Admin
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetByUserId(int id)
+        public IActionResult GetByProjectId(int id)
         {
             var user = _projectService.getByProjectId(id);
             if (user == null)
@@ -49,7 +50,6 @@ namespace DigitalProject.Controllers.Admin
             {
                 return BadRequest(ModelState);
             }
-
             try
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
@@ -60,18 +60,42 @@ namespace DigitalProject.Controllers.Admin
             }
             catch (Exception)
             {
-
                 throw;
             }
 
+        }
+        [HttpPut]
+        public IActionResult UpdateProject(ProjectDTO dto, int id) {
+            var result = _projectService.EditProject(dto, id);
+            if (!result)
+                return NotFound("Dự án không tồn tại");
+
+            return Ok("Cập nhật dự án thành công");
 
         }
+     
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteProject(int id)
         {
             var result = _projectService.DeleteProject(id);
             if (result == false) return NotFound("Dự án không tồn tại");
             return Ok("Xóa dự án thành công");
+
+        }
+        [HttpGet]
+        [Route("SearchByKey")]
+        public IActionResult SearchByKey(string? key, string? structuralEngineer, DateTime? postingStartDate = null, DateTime? postingEndDate = null)
+        {
+            try
+            {
+                
+                var data = _projectService.getListProjectByKeyword(key, structuralEngineer, postingStartDate, postingEndDate);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Lỗi " + ex.Message });
+            }
 
         }
     }

@@ -5,9 +5,9 @@ namespace DigitalProject.Services.Interface
 {
     public interface IUserService
     {
-        List<User> GetListUser();
+        List<UserDTO> GetListUser();
         string  CreateUser(UserRequestData Dto);
-        User getByUserId(int userId);
+        UserDTO getByUserId(int userId);
         bool EditUser(UserRequestData Dto, int userId);
         bool DeleteUser(int userId);
         List<User> GetByKeyword(string? key, bool isActive);

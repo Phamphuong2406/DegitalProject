@@ -273,11 +273,6 @@ C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\Digit
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\DigitalProject.sourcelink.json
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets\msbuild.DigitalProject.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets\msbuild.build.DigitalProject.props
-C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.DigitalProject.props
-C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.DigitalProject.props
-C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\scopedcss\bundle\DigitalProject.styles.css
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\DigitalP.47BD8EF7.Up2Date
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\DigitalProject.dll
@@ -285,3 +280,12 @@ C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\refin
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\DigitalProject.pdb
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\DigitalProject.genruntimeconfig.cache
 C:\Users\Admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\ref\DigitalProject.dll
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\bin\Debug\net8.0\DigitalProject.staticwebassets.endpoints.json
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\admin\source\repos\DegitalProject\DigitalProject\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

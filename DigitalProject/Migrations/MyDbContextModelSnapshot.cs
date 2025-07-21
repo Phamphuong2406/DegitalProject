@@ -19,6 +19,42 @@ namespace DigitalProject.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("DigitalProject.Entitys.Gallery", b =>
+                {
+                    b.Property<int>("PalleryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("Displayorder")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("GalleryName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("PosterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PalleryId");
+
+                    b.HasIndex("PosterId");
+
+                    b.ToTable("Gallerys", (string)null);
+                });
+
             modelBuilder.Entity("DigitalProject.Entitys.Project", b =>
                 {
                     b.Property<int>("ProjectId")
@@ -174,6 +210,17 @@ namespace DigitalProject.Migrations
                     b.ToTable("UserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("DigitalProject.Entitys.Gallery", b =>
+                {
+                    b.HasOne("DigitalProject.Entitys.User", "users")
+                        .WithMany("galleries")
+                        .HasForeignKey("PosterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("users");
+                });
+
             modelBuilder.Entity("DigitalProject.Entitys.Project", b =>
                 {
                     b.HasOne("DigitalProject.Entitys.User", "users")
@@ -211,6 +258,8 @@ namespace DigitalProject.Migrations
 
             modelBuilder.Entity("DigitalProject.Entitys.User", b =>
                 {
+                    b.Navigation("galleries");
+
                     b.Navigation("projects");
 
                     b.Navigation("userRoles");

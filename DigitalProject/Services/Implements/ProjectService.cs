@@ -1,4 +1,5 @@
-﻿using DigitalProject.Entitys;
+﻿using AutoMapper;
+using DigitalProject.Entitys;
 using DigitalProject.Models.User.Project;
 using DigitalProject.Repositories.Interface;
 using DigitalProject.Services.Interface;
@@ -8,6 +9,7 @@ namespace DigitalProject.Services.Implements
     public class ProjectService: IProjectService
     {
         private readonly IProjectRepository _projectRepo;
+        private readonly IMapper _mapper;
         public ProjectService(IProjectRepository projectRepo)
         {
 
@@ -16,6 +18,20 @@ namespace DigitalProject.Services.Implements
         public List<Project> GetListProject()
         {
             return _projectRepo.getListProject();
+        }
+        public List<Project> getListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate = null, DateTime? postingEndDate = null)
+        {
+            try
+            {
+
+                return _projectRepo.getListProjectByKey(key, structuralEngineer, postingStartDate, postingEndDate);
+
+            }
+            catch (Exception)
+            {
+
+                throw new ApplicationException("Có lỗi xảy ra khi gọi danh sách bài viết");
+            }
         }
         public Project getByProjectId(int projectId)
         {
@@ -36,6 +52,7 @@ namespace DigitalProject.Services.Implements
                 {
                     return false ;
                 }
+                
                 var project = new Project
                 {
                     ProjectName = model.ProjectName,
@@ -65,7 +82,30 @@ namespace DigitalProject.Services.Implements
             }
 
         }
+        public bool EditProject(ProjectDTO model, int projectId)
+        {
 
+            var project = _projectRepo.GetProjectById(projectId);
+            if (project == null) return false;
+
+            project.ProjectName = model.ProjectName;
+            project.ProjectType = model.ProjectType;
+            project.ImageUrl = model.ImageUrl;
+            project.Shortdescription = model.Shortdescription;
+            project.DetailedDescription = model.DetailedDescription;
+            project.architect = model.architect;
+            project.structuralEngineer = model.structuralEngineer;
+            project.ConstructionEndTime = model.ConstructionEndTime;
+            project.ConstructionStartTime = model.ConstructionStartTime;
+            project.PostedTime = DateTime.Now;
+            project.DisplayOnHeader = model.DisplayOnHeader;
+            project.DisplayOnhome = model.DisplayOnhome;
+            project.DisplayOrderOnHeader = model.DisplayOrderOnHeader;
+            project.DisplayOrderOnHome = model.DisplayOrderOnHome;
+            project.ExpirationTimeOnHeader = model.ExpirationTimeOnHeader;
+
+            return _projectRepo.EditProject(project);
+        }
         public bool DeleteProject(int projectId)
         {
             var project = _projectRepo.GetProjectById(projectId);
@@ -73,5 +113,6 @@ namespace DigitalProject.Services.Implements
             _projectRepo.DeleteProject(project);
             return true;
         }
+       
     }
 }

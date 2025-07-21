@@ -1,4 +1,7 @@
 ﻿
+using AutoMapper;
+using Digitalgallery.Repositories.Implements;
+using DigitalProject.Common.AutoMapper;
 using DigitalProject.Entitys;
 using DigitalProject.Repositories.Implements;
 using DigitalProject.Repositories.Interface;
@@ -9,8 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
-using AutoMapper;
-using DigitalProject.Common.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,8 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 builder.Services.AddTransient<IProjectService, ProjectService>();
+builder.Services.AddTransient<IGalleryRepository, GalleryRepository>();
+builder.Services.AddTransient<IGalleryService, GalleryService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

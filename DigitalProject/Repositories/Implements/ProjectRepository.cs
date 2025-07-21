@@ -1,7 +1,5 @@
 ﻿using DigitalProject.Entitys;
-using DigitalProject.Models.User.Project;
 using DigitalProject.Repositories.Interface;
-using System.Linq;
 
 namespace DigitalProject.Repositories.Implements
 {
@@ -16,6 +14,54 @@ namespace DigitalProject.Repositories.Implements
         public List<Project> getListProject()
         {
             return _context.projects.Select(x => new Project
+            {
+                ProjectId = x.ProjectId,
+                ProjectName = x.ProjectName,
+                ProjectType = x.ProjectType,
+                ImageUrl = x.ImageUrl,
+                Shortdescription = x.Shortdescription,
+                DetailedDescription = x.DetailedDescription,
+                architect = x.architect,
+                structuralEngineer = x.structuralEngineer,
+                ConstructionEndTime = x.ConstructionEndTime,
+                ConstructionStartTime = x.ConstructionStartTime,
+                PostedTime = x.PostedTime,
+                DisplayOnHeader = x.DisplayOnHeader,
+                DisplayOnhome = x.DisplayOnhome,
+                DisplayOrderOnHeader = x.DisplayOrderOnHeader,
+                DisplayOrderOnHome = x.DisplayOrderOnHome,
+                ExpirationTimeOnHeader = x.ExpirationTimeOnHeader,
+                IdPoster = x.IdPoster,
+            }).ToList();
+        }
+        public List<Project> getListProjectByKey(string? key, string? structuralEngineer, DateTime? postingStartDate = null, DateTime? postingEndDate = null)
+        {
+            var query = _context.projects.AsQueryable();
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                key = key.ToLower();
+                query = query.Where(z =>
+                   z.ProjectName.ToLower().Contains(key) || z.Shortdescription.ToLower().Contains(key));
+            }
+
+            if (!string.IsNullOrEmpty(structuralEngineer))
+            {
+                query = query.Where(z => z.structuralEngineer.ToLower().Contains(structuralEngineer));
+            }
+
+            if (postingStartDate.HasValue)
+            {
+                query = query.Where(z => z.PostedTime >= postingStartDate);
+            }
+            if (postingEndDate.HasValue)
+            {
+                var adjustedEnd = postingEndDate.Value.AddDays(1).AddMinutes(-1);
+                query = query.Where(z => z.PostedTime <= adjustedEnd);
+            }
+
+
+            return query.Select(x => new Project
             {
                 ProjectId = x.ProjectId,
                 ProjectName = x.ProjectName,
@@ -52,6 +98,12 @@ namespace DigitalProject.Repositories.Implements
             _context.projects.Add(project);
             _context.SaveChanges();
 
+        }
+        public bool EditProject(Project project)
+        {
+            _context.projects.Update(project);
+            var result = _context.SaveChanges();
+            return result > 0;
         }
         public void DeleteProject(Project model)
         {

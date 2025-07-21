@@ -70,8 +70,6 @@ namespace DigitalProject.Controllers.Admin
                 responseData.Message = "Đã xảy ra lỗi: " + ex.Message;
                 return StatusCode(500, responseData);
             }
-
-
         }
      
         [HttpPut("{id}")]

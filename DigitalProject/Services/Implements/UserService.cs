@@ -1,4 +1,5 @@
-﻿using DigitalProject.Entitys;
+﻿using AutoMapper;
+using DigitalProject.Entitys;
 using DigitalProject.Models.User;
 using DigitalProject.Repositories.Implements;
 using DigitalProject.Repositories.Interface;
@@ -13,24 +14,26 @@ namespace DigitalProject.Services.Implements
     {
         private readonly IUserRepository _userRepo;
         private readonly ILogger<UserService> _logger;
-        public UserService(IUserRepository userRepo, ILogger<UserService> logger) { _userRepo = userRepo; _logger = logger; }
+        private readonly IMapper _mapper;
+        public UserService(IUserRepository userRepo, ILogger<UserService> logger, IMapper mapper) { _userRepo = userRepo; _logger = logger; _mapper = mapper; }
 
         public User getUserById(int userId)
         {
             return _userRepo.GetUserById(userId);
         }
-        public List<User> GetListUser()
+        public List<UserDTO> GetListUser()
         {
-            return _userRepo.getListUser();
+            var result = _userRepo.getListUser();
+            return _mapper.Map<List<UserDTO>>(result);//map entity => DTO
         }
-        public User getByUserId(int userId)
+        public UserDTO getByUserId(int userId)
         {
             var user = _userRepo.GetUserById(userId);
             if (user == null)
             {
                 return null;
             }
-            return user;
+            return _mapper.Map<UserDTO>(user);
         }
         public string CreateUser(UserRequestData ModelDto)
         {
@@ -43,16 +46,9 @@ namespace DigitalProject.Services.Implements
 
                 }
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(ModelDto.Password);
-                var user = new User
-                {
-                    UserName = ModelDto.UserName,
-                    FullName = ModelDto.Email,
-                    Email = ModelDto.Email,
-                    HashedPassword = hashedPassword,
-                    PhoneNumber = ModelDto.PhoneNumber,
-                    IsActive = true,
-
-                };
+                var user = _mapper.Map<User>(ModelDto);
+                user.HashedPassword = hashedPassword;
+                user.IsActive = true;
                 _userRepo.AddUser(user);
                 return "Đã thêm mới";
             }
