@@ -1,9 +1,8 @@
 ﻿using DigitalProject.Common.Filter;
-using DigitalProject.Models.User;
-using DigitalProject.Models.User.Project;
-using DigitalProject.Services.Implements;
+using DigitalProject.Common.Paging;
+using DigitalProject.Entitys;
+using DigitalProject.Models.Project;
 using DigitalProject.Services.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -84,13 +83,25 @@ namespace DigitalProject.Controllers.Admin
         }
         [HttpGet]
         [Route("SearchByKey")]
-        public IActionResult SearchByKey(string? key, string? structuralEngineer, DateTime? postingStartDate = null, DateTime? postingEndDate = null)
+        public IActionResult SearchByKey(string? key, string? structuralEngineer, DateTime? postingStartDate = null, DateTime? postingEndDate = null, int pageNumber = 1, int pageSize = 10)
         {
             try
             {
                 
                 var data = _projectService.getListProjectByKeyword(key, structuralEngineer, postingStartDate, postingEndDate);
-                return Ok(data);
+                int totalRecords = data.Count();
+                var pagedData = data
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                return Ok(new PagingModel<Project>
+                {
+                    TotalRecords = totalRecords,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    Data = pagedData
+                });
             }
             catch (Exception ex)
             {

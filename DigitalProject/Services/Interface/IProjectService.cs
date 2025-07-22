@@ -1,5 +1,5 @@
 ﻿using DigitalProject.Entitys;
-using DigitalProject.Models.User.Project;
+using DigitalProject.Models.Project;
 
 namespace DigitalProject.Services.Interface
 {

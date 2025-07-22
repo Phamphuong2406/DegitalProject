@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using DigitalProject.Entitys;
 using DigitalProject.Models.User;
-using DigitalProject.Repositories.Implements;
 using DigitalProject.Repositories.Interface;
 using DigitalProject.Services.Interface;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.Net.WebSockets;
 
 namespace DigitalProject.Services.Implements
 {
@@ -62,6 +58,7 @@ namespace DigitalProject.Services.Implements
         {
             var user = _userRepo.GetUserById(userId);
             if (user == null) return false;
+            // var userEdit = _mapper.Map<User>(Dto);
 
             user.UserName = Dto.UserName;
             user.Email = Dto.Email;

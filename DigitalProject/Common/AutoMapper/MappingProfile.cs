@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DigitalProject.Entitys;
+using DigitalProject.Models.Project;
 using DigitalProject.Models.User;
 
 namespace DigitalProject.Common.AutoMapper
@@ -10,6 +11,7 @@ namespace DigitalProject.Common.AutoMapper
         public MappingProfile() {
             CreateMap<User, UserDTO>().ReverseMap(); ;//map User=> UserDTO
             CreateMap<UserRequestData, User>();
+            CreateMap<ProjectDTO, Project>();
         }
         
     }

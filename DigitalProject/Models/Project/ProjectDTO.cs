@@ -1,4 +1,4 @@
-﻿namespace DigitalProject.Models.User.Project
+﻿namespace DigitalProject.Models.Project
 {
   
         public class ProjectDTO

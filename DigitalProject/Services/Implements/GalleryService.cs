@@ -1,12 +1,9 @@
 ﻿
 using DigitalProject.Common.UploadFile;
 using DigitalProject.Entitys;
-using DigitalProject.Models.User.Gallery;
+using DigitalProject.Models.Gallery;
 using DigitalProject.Repositories.Interface;
 using DigitalProject.Services.Interface;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Net;
 
 namespace DigitalProject.Services.Implements
 {

@@ -1,4 +1,4 @@
-﻿namespace DigitalProject.Models.User.Gallery
+﻿namespace DigitalProject.Models.Gallery
 {
     public class GalleryDTO
     {

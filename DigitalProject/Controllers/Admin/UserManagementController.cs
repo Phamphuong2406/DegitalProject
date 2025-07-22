@@ -1,13 +1,8 @@
-﻿using DigitalProject.Common.Filter;
+﻿using DigitalProject.Common.Paging;
+using DigitalProject.Entitys;
 using DigitalProject.Models.User;
 using DigitalProject.Services.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace DigitalProject.Controllers.Admin
 {
@@ -92,12 +87,24 @@ namespace DigitalProject.Controllers.Admin
         }
         [HttpGet]
         [Route("SearchByKey")]
-        public IActionResult SearchByKey(string? key ,bool isActive)
+        public IActionResult SearchByKey(string? key ,bool isActive, int pageNumber=1, int pageSize=10)
         {
             try
             {
                 var data = _userService.GetByKeyword(key, isActive);
-                return Ok(data);
+                int totalRecords = data.Count();
+                var pagedData = data
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                return Ok(new PagingModel<User>
+                {
+                    TotalRecords = totalRecords,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    Data = pagedData
+                });
             }
             catch (Exception ex)
             {

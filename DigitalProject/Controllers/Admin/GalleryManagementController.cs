@@ -1,10 +1,8 @@
 ﻿using DigitalProject.Common.Filter;
-using DigitalProject.Common.UploadFile;
-using DigitalProject.Models.User.Gallery;
-using DigitalProject.Models.User.Project;
-using DigitalProject.Services.Implements;
+using DigitalProject.Common.Paging;
+using DigitalProject.Entitys;
+using DigitalProject.Models.Gallery;
 using DigitalProject.Services.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -89,13 +87,25 @@ namespace DigitalProject.Controllers.Admin
         }
         [HttpGet]
         [Route("SearchByKey")]
-        public IActionResult SearchByKey(string? address, DateTime? postingStartDate = null, DateTime? postingEndDate = null)
+        public IActionResult SearchByKey(string? address, DateTime? postingStartDate = null, DateTime? postingEndDate = null, int pageNumber = 1, int pageSize = 10)
         {
             try
             {
 
                 var data = _galleryService.getListGalleryByKeyword(address,  postingStartDate, postingEndDate);
-                return Ok(data);
+                int totalRecords = data.Count();
+                var pagedData = data
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                return Ok(new PagingModel<Gallery>
+                {
+                    TotalRecords = totalRecords,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    Data = pagedData
+                });
             }
             catch (Exception ex)
             {

@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using DigitalProject.Entitys;
-using DigitalProject.Models.User.Project;
+using DigitalProject.Models.Project;
 using DigitalProject.Repositories.Interface;
 using DigitalProject.Services.Interface;
 
 namespace DigitalProject.Services.Implements
 {
-    public class ProjectService: IProjectService
+    public class ProjectService : IProjectService
     {
         private readonly IProjectRepository _projectRepo;
         private readonly IMapper _mapper;
@@ -42,36 +42,19 @@ namespace DigitalProject.Services.Implements
             }
             return project;
         }
-        
-        public bool AddProject(ProjectDTO model,int  currentUserId)
+
+        public bool AddProject(ProjectDTO model, int currentUserId)
         {
             try
             {
                 var result = _projectRepo.GetProjectByName(model.ProjectName);
-                if(result == true)
+                if (result == true)
                 {
-                    return false ;
+                    return false;
                 }
-                
-                var project = new Project
-                {
-                    ProjectName = model.ProjectName,
-                    ProjectType = model.ProjectType,
-                    ImageUrl = model.ImageUrl,
-                    Shortdescription = model.Shortdescription,
-                    DetailedDescription = model.DetailedDescription,
-                    architect = model.architect,
-                    structuralEngineer = model.structuralEngineer,
-                    ConstructionEndTime = model.ConstructionEndTime,
-                    ConstructionStartTime = model.ConstructionStartTime,
-                    PostedTime = DateTime.Now,
-                    DisplayOnHeader = model.DisplayOnHeader,
-                    DisplayOnhome = model.DisplayOnhome,
-                    DisplayOrderOnHeader = model.DisplayOrderOnHeader,
-                    DisplayOrderOnHome = model.DisplayOrderOnHome,
-                    ExpirationTimeOnHeader = model.ExpirationTimeOnHeader,
-                    IdPoster = currentUserId,
-                };
+                var project = _mapper.Map<Project>(model);
+                project.IdPoster = currentUserId;
+                project.PostedTime = DateTime.Now;
                 _projectRepo.CreateProject(project);
                 return true;
             }
@@ -87,7 +70,6 @@ namespace DigitalProject.Services.Implements
 
             var project = _projectRepo.GetProjectById(projectId);
             if (project == null) return false;
-
             project.ProjectName = model.ProjectName;
             project.ProjectType = model.ProjectType;
             project.ImageUrl = model.ImageUrl;
@@ -113,6 +95,6 @@ namespace DigitalProject.Services.Implements
             _projectRepo.DeleteProject(project);
             return true;
         }
-       
+
     }
 }
