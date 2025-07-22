@@ -1,40 +1,28 @@
-﻿using DigitalProject.Entitys;
+﻿using AutoMapper;
+using DigitalProject.Common.Paging;
+using DigitalProject.Entitys;
+using DigitalProject.Models.Project;
+using DigitalProject.Models.User;
 using DigitalProject.Repositories.Interface;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DigitalProject.Repositories.Implements
 {
     public class ProjectRepository : IProjectRepository
     {
         private readonly MyDbContext _context;
-        public ProjectRepository(MyDbContext context)
+
+        private readonly IMapper _mapper;
+        public ProjectRepository(MyDbContext context, IMapper mapper)
         {
             _context = context;
-
+            _mapper = mapper;
         }
         public List<Project> getListProject()
         {
-            return _context.projects.Select(x => new Project
-            {
-                ProjectId = x.ProjectId,
-                ProjectName = x.ProjectName,
-                ProjectType = x.ProjectType,
-                ImageUrl = x.ImageUrl,
-                Shortdescription = x.Shortdescription,
-                DetailedDescription = x.DetailedDescription,
-                architect = x.architect,
-                structuralEngineer = x.structuralEngineer,
-                ConstructionEndTime = x.ConstructionEndTime,
-                ConstructionStartTime = x.ConstructionStartTime,
-                PostedTime = x.PostedTime,
-                DisplayOnHeader = x.DisplayOnHeader,
-                DisplayOnhome = x.DisplayOnhome,
-                DisplayOrderOnHeader = x.DisplayOrderOnHeader,
-                DisplayOrderOnHome = x.DisplayOrderOnHome,
-                ExpirationTimeOnHeader = x.ExpirationTimeOnHeader,
-                IdPoster = x.IdPoster,
-            }).ToList();
+            return _context.projects.ToList();
         }
-        public List<Project> getListProjectByKey(string? key, string? structuralEngineer, DateTime? postingStartDate = null, DateTime? postingEndDate = null)
+        public PagingModel<ProjectDTO> getListProjectByKey(string? key, string? structuralEngineer, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize)
         {
             var query = _context.projects.AsQueryable();
 
@@ -59,39 +47,27 @@ namespace DigitalProject.Repositories.Implements
                 var adjustedEnd = postingEndDate.Value.AddDays(1).AddMinutes(-1);
                 query = query.Where(z => z.PostedTime <= adjustedEnd);
             }
-
-
-            return query.Select(x => new Project
+            var totalRecords = query.Count();
+            var pagedData = query.Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            var data = _mapper.Map<List<ProjectDTO>>(pagedData);
+            return new PagingModel<ProjectDTO>
             {
-                ProjectId = x.ProjectId,
-                ProjectName = x.ProjectName,
-                ProjectType = x.ProjectType,
-                ImageUrl = x.ImageUrl,
-                Shortdescription = x.Shortdescription,
-                DetailedDescription = x.DetailedDescription,
-                architect = x.architect,
-                structuralEngineer = x.structuralEngineer,
-                ConstructionEndTime = x.ConstructionEndTime,
-                ConstructionStartTime = x.ConstructionStartTime,
-                PostedTime = x.PostedTime,
-                DisplayOnHeader = x.DisplayOnHeader,
-                DisplayOnhome = x.DisplayOnhome,
-                DisplayOrderOnHeader = x.DisplayOrderOnHeader,
-                DisplayOrderOnHome = x.DisplayOrderOnHome,
-                ExpirationTimeOnHeader = x.ExpirationTimeOnHeader,
-                IdPoster = x.IdPoster,
-            }).ToList();
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Data = data,
+                TotalRecords = totalRecords
+            };
         }
-        public Project GetProjectById(int projectId)
+        public Project? GetProjectById(int projectId)
         {
-            var project = _context.projects.FirstOrDefault(x => x.ProjectId == projectId);
-            if (project == null) { return null; }
-            return project;
+            return _context.projects.FirstOrDefault(x => x.ProjectId == projectId);
         }
         public bool GetProjectByName(string ProjectName)
         {
             var project = _context.projects.FirstOrDefault(x => x.ProjectName == ProjectName);
-            if (project == null) { return false; } else { return true; }
+            return project != null;
         }
         public void CreateProject(Project project)
         {
@@ -103,7 +79,7 @@ namespace DigitalProject.Repositories.Implements
         {
             _context.projects.Update(project);
             var result = _context.SaveChanges();
-            return result > 0;
+            return result >0;
         }
         public void DeleteProject(Project model)
         {

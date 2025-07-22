@@ -1,4 +1,6 @@
-﻿using DigitalProject.Entitys;
+﻿using DigitalProject.Common.Paging;
+using DigitalProject.Entitys;
+using DigitalProject.Models.User;
 
 namespace DigitalProject.Repositories.Interface
 {
@@ -10,7 +12,7 @@ namespace DigitalProject.Repositories.Interface
         User GetUserById(int id);
         bool EditUser(User model);
         void DeleteUser(User model);
-        bool UpdateRefreshToken(User model);
-        List<User> GetUserByKey(string? key, bool IsActive);
+        bool UpdateRefreshToken(int idUser, string refreshToken, string refreshTokenExprired);
+        PagingModel<UserDTO> GetUserByKey(string? key, bool IsActive, int pageNumber, int pageSize);
     }
 }

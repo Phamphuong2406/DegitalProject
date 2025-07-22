@@ -1,13 +1,15 @@
-﻿using DigitalProject.Entitys;
+﻿using DigitalProject.Common.Paging;
+using DigitalProject.Entitys;
+using DigitalProject.Models.Gallery;
 
 namespace DigitalProject.Repositories.Interface
 {
     public interface IGalleryRepository
     {
         List<Gallery> getListGallery();
-        Gallery GetGalleryById(int galleryId);
+        Gallery? GetGalleryById(int galleryId);
         bool GetGalleryByName(string galleryName);
-        List<Gallery> getListGalleryByKey(string? address, DateTime? postingStartDate = null, DateTime? postingEndDate = null);
+        PagingModel<GetGalleryDTO> getListGalleryByKey(string? address, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize);
         void CreateGallery(Gallery gallery);
         bool Editgallery(Gallery gallery);
         void Deletegallery(Gallery model);

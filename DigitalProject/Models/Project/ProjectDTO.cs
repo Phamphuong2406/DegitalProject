@@ -1,10 +1,14 @@
-﻿namespace DigitalProject.Models.Project
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DigitalProject.Models.Project
 {
   
         public class ProjectDTO
         {
             public int? ProjectId { get; set; }
-            public string? ProjectName { get; set; }
+        [Required(ErrorMessage = "Bạn chưa điền tên dự án")]
+        [StringLength(50, ErrorMessage = "Tên dự án không vượt quá 50 ký tự")]
+        public string? ProjectName { get; set; }
             public string? ProjectType { get; set; }
             // public string avataUrl { get; set; }
             public string? ImageUrl { get; set; }

@@ -26,63 +26,69 @@ namespace DigitalProject.Controllers.Admin
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "Lỗi " + ex.Message });
+                return BadRequest(new { message = ex.Message });
             }
         }
 
         [HttpGet("{id}")]
         public IActionResult GetByGalleryId(int id)
         {
-            var user = _galleryService.getBygalleryId(id);
-
-            if (user == null)
+            try
             {
-                return NotFound("Địa điểm không tồn tại");
+                var user = _galleryService.getBygalleryId(id);
+                return Ok(user);
             }
-            return Ok(user);
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+           
         }
         [HttpPost]
         [Authorize]
         public IActionResult CreateGellery([FromForm]GalleryDTO model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             try
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
                 int currentUserId = Convert.ToInt32(claimsIdentity.FindFirst(ClaimTypes.PrimarySid)?.Value);
-             
-                var result = _galleryService.Addgallery(model, currentUserId);
-                if (!result) return BadRequest("Địa điểm đã tồn tại vui lòng nhập lại thông tin!");
+               _galleryService.Addgallery(model, currentUserId);
                 return Ok("Thêm mới địa điểm thành công ");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return BadRequest(new { message = ex.Message });
             }
 
         }
         [HttpPut("{id}")]
         public IActionResult UpdateGallery([FromForm] GalleryDTO dto, int id)
         {
-            var result = _galleryService.Editgallery(dto, id);
-            if (!result)
-                return NotFound("Địa điểm không tồn tại");
-
-            return Ok("Cập nhật địa điểm thành công");
+            try
+            {
+                var result = _galleryService.Editgallery(dto, id);
+                return Ok("Cập nhật địa điểm thành công");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+         
 
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteGallery(int id)
         {
-            var result = _galleryService.Deletegallery(id);
-            if (result == false) return NotFound("Địa điểm không tồn tại");
-            return Ok("Xóa địa điểm thành công");
+            try
+            {
+                _galleryService.Deletegallery(id);
+                return Ok("Xóa địa điểm thành công");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
 
         }
         [HttpGet]
@@ -91,25 +97,11 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-
-                var data = _galleryService.getListGalleryByKeyword(address,  postingStartDate, postingEndDate);
-                int totalRecords = data.Count();
-                var pagedData = data
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToList();
-
-                return Ok(new PagingModel<Gallery>
-                {
-                    TotalRecords = totalRecords,
-                    PageNumber = pageNumber,
-                    PageSize = pageSize,
-                    Data = pagedData
-                });
+               return Ok(_galleryService.getListGalleryByKeyword(address, postingStartDate, postingEndDate, pageNumber, pageSize));
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "Lỗi " + ex.Message });
+                return BadRequest(new { message =  ex.Message });
             }
 
         }

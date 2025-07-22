@@ -27,18 +27,21 @@ namespace DigitalProject.Controllers.Admin
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "Lỗi " + ex.Message });
+                return BadRequest(new { message = ex.Message });
             }
         }
         [HttpGet("{id}")]
         public IActionResult GetByUserId(int id)
         {
-            var user = _userService.getByUserId(id);
-            if (user == null)
+            try
             {
-                return NotFound("Người dùng không tồn tại");
+                return Ok(_userService.getByUserId(id));
             }
-            return Ok(user);
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            
         }
         [HttpPost]
         public IActionResult CreateUser(UserRequestData requestData)
@@ -46,24 +49,13 @@ namespace DigitalProject.Controllers.Admin
             var responseData = new ResponseData();
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                var result = _userService.CreateUser(requestData);
-                if (result == "Người dùng đã tồn tại")
-                {
-                    responseData.Message = "Tài khoản đã tồn tại!";
-                    return BadRequest(responseData);
-                }
+                _userService.CreateUser(requestData);
                 responseData.Message = "Tạo tài khoản thành công";
-
                 return Ok(responseData);
             }
             catch (Exception ex)
             {
-                responseData.Message = "Đã xảy ra lỗi: " + ex.Message;
-                return StatusCode(500, responseData);
+                return BadRequest(new { message = ex.Message });
             }
         }
      
@@ -71,19 +63,30 @@ namespace DigitalProject.Controllers.Admin
        
         public IActionResult UpdateUser(UserRequestData dto, int id)
         {
-            var result = _userService.EditUser(dto, id);
-            if (!result)
-                return NotFound("Người dùng không tồn tại");
-
-            return Ok("Cập nhật người dùng thành công");
+            try
+            {
+                _userService.EditUser(dto, id);
+                return Ok("Cập nhật người dùng thành công!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+          
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
-            var result = _userService.DeleteUser(id);
-            if (result == false) return NotFound("Người dùng không tồn tại");
-            return Ok("Xóa người dùng thành công");
-
+            try
+            {
+                _userService.DeleteUser(id);
+                return Ok("Xóa người dùng thành công");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new {message = ex.Message});
+            }
+          
         }
         [HttpGet]
         [Route("SearchByKey")]
@@ -91,24 +94,12 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                var data = _userService.GetByKeyword(key, isActive);
-                int totalRecords = data.Count();
-                var pagedData = data
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToList();
-
-                return Ok(new PagingModel<User>
-                {
-                    TotalRecords = totalRecords,
-                    PageNumber = pageNumber,
-                    PageSize = pageSize,
-                    Data = pagedData
-                });
+                var data = _userService.GetByKeyword(key, isActive, pageNumber, pageSize);
+                return Ok(data);
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "Lỗi " + ex.Message });
+                return BadRequest(new { message =  ex.Message });
             }
 
         }

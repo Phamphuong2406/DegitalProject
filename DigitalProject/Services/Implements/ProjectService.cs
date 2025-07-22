@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DigitalProject.Common.Paging;
 using DigitalProject.Entitys;
 using DigitalProject.Models.Project;
 using DigitalProject.Repositories.Interface;
@@ -12,20 +13,26 @@ namespace DigitalProject.Services.Implements
         private readonly IMapper _mapper;
         public ProjectService(IProjectRepository projectRepo)
         {
-
             _projectRepo = projectRepo;
         }
-        public List<Project> GetListProject()
-        {
-            return _projectRepo.getListProject();
-        }
-        public List<Project> getListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate = null, DateTime? postingEndDate = null)
+        public List<ProjectDTO> GetListProject()
         {
             try
             {
-
-                return _projectRepo.getListProjectByKey(key, structuralEngineer, postingStartDate, postingEndDate);
-
+                var data = _projectRepo.getListProject();
+                return _mapper.Map<List<ProjectDTO>>(data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+         
+        }
+        public PagingModel<ProjectDTO> getListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate , DateTime? postingEndDate, int pageNumber, int pageSize)
+        {
+            try
+            {
+                return _projectRepo.getListProjectByKey(key, structuralEngineer, postingStartDate, postingEndDate, pageNumber, pageSize);
             }
             catch (Exception)
             {
@@ -35,27 +42,68 @@ namespace DigitalProject.Services.Implements
         }
         public Project getByProjectId(int projectId)
         {
-            var project = _projectRepo.GetProjectById(projectId);
-            if (project == null)
+            try
             {
-                return null;
+                return _projectRepo.GetProjectById(projectId);
             }
-            return project;
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
-        public bool AddProject(ProjectDTO model, int currentUserId)
+        public void AddProject(ProjectDTO model, int currentUserId)
         {
             try
             {
                 var result = _projectRepo.GetProjectByName(model.ProjectName);
-                if (result == true)
-                {
-                    return false;
-                }
+               
                 var project = _mapper.Map<Project>(model);
                 project.IdPoster = currentUserId;
                 project.PostedTime = DateTime.Now;
                 _projectRepo.CreateProject(project);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public bool EditProject(ProjectDTO model, int projectId)
+        {
+            try
+            {
+                var project = _projectRepo.GetProjectById(projectId);
+                project.ProjectName = model.ProjectName;
+                project.ProjectType = model.ProjectType;
+                project.ImageUrl = model.ImageUrl;
+                project.Shortdescription = model.Shortdescription;
+                project.DetailedDescription = model.DetailedDescription;
+                project.architect = model.architect;
+                project.structuralEngineer = model.structuralEngineer;
+                project.ConstructionEndTime = model.ConstructionEndTime;
+                project.ConstructionStartTime = model.ConstructionStartTime;
+                project.PostedTime = DateTime.Now;
+                project.DisplayOnHeader = model.DisplayOnHeader;
+                project.DisplayOnhome = model.DisplayOnhome;
+                project.DisplayOrderOnHeader = model.DisplayOrderOnHeader;
+                project.DisplayOrderOnHome = model.DisplayOrderOnHome;
+                project.ExpirationTimeOnHeader = model.ExpirationTimeOnHeader;
+
+                return _projectRepo.EditProject(project);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
+        public bool DeleteProject(int projectId)
+        {
+            try
+            {
+                var project = _projectRepo.GetProjectById(projectId);
+                _projectRepo.DeleteProject(project);
                 return true;
             }
             catch (Exception)
@@ -63,37 +111,7 @@ namespace DigitalProject.Services.Implements
 
                 throw;
             }
-
-        }
-        public bool EditProject(ProjectDTO model, int projectId)
-        {
-
-            var project = _projectRepo.GetProjectById(projectId);
-            if (project == null) return false;
-            project.ProjectName = model.ProjectName;
-            project.ProjectType = model.ProjectType;
-            project.ImageUrl = model.ImageUrl;
-            project.Shortdescription = model.Shortdescription;
-            project.DetailedDescription = model.DetailedDescription;
-            project.architect = model.architect;
-            project.structuralEngineer = model.structuralEngineer;
-            project.ConstructionEndTime = model.ConstructionEndTime;
-            project.ConstructionStartTime = model.ConstructionStartTime;
-            project.PostedTime = DateTime.Now;
-            project.DisplayOnHeader = model.DisplayOnHeader;
-            project.DisplayOnhome = model.DisplayOnhome;
-            project.DisplayOrderOnHeader = model.DisplayOrderOnHeader;
-            project.DisplayOrderOnHome = model.DisplayOrderOnHome;
-            project.ExpirationTimeOnHeader = model.ExpirationTimeOnHeader;
-
-            return _projectRepo.EditProject(project);
-        }
-        public bool DeleteProject(int projectId)
-        {
-            var project = _projectRepo.GetProjectById(projectId);
-            if (project == null) return false;
-            _projectRepo.DeleteProject(project);
-            return true;
+          
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using DigitalProject.Entitys;
+﻿using DigitalProject.Common.Paging;
+using DigitalProject.Entitys;
 using DigitalProject.Models.Gallery;
 
 namespace DigitalProject.Services.Interface
@@ -7,11 +8,11 @@ namespace DigitalProject.Services.Interface
     {
         List<Gallery> GetListgallery();
 
-        Gallery getBygalleryId(int galleryId);
-        List<Gallery> getListGalleryByKeyword(string? address, DateTime? postingStartDate = null, DateTime? postingEndDate = null);
-        bool Addgallery(GalleryDTO model, int currentUserId);
+        Gallery? getBygalleryId(int galleryId);
+        PagingModel<GetGalleryDTO> getListGalleryByKeyword(string? address, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize);
+        void Addgallery(GalleryDTO model, int currentUserId);
         bool Editgallery(GalleryDTO model, int galleryId);
-        bool Deletegallery(int galleryId);
+        void Deletegallery(int galleryId);
         
     }
 }

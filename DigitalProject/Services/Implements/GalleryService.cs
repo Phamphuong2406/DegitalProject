@@ -1,4 +1,5 @@
 ﻿
+using DigitalProject.Common.Paging;
 using DigitalProject.Common.UploadFile;
 using DigitalProject.Entitys;
 using DigitalProject.Models.Gallery;
@@ -17,43 +18,49 @@ namespace DigitalProject.Services.Implements
         }
         public List<Gallery> GetListgallery()
         {
-            return _galleryRepo.getListGallery();
+            try
+            {
+                return _galleryRepo.getListGallery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
        
-        public Gallery getBygalleryId(int galleryId)
+        public Gallery? getBygalleryId(int galleryId)
         {
-            var gallery = _galleryRepo.GetGalleryById(galleryId);
-            if (gallery == null)
+            try
             {
-                return null;
+                return _galleryRepo.GetGalleryById(galleryId);
             }
-            return gallery;
+            catch (Exception)
+            {
+                throw;
+            }
+           
         }
-        public List<Gallery> getListGalleryByKeyword(string? address, DateTime? postingStartDate = null, DateTime? postingEndDate = null)
+        public PagingModel<GetGalleryDTO> getListGalleryByKeyword(string? address, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize)
         {
             try
             {
 
-                return _galleryRepo.getListGalleryByKey(address, postingStartDate, postingEndDate);
+                return _galleryRepo.getListGalleryByKey(address, postingStartDate, postingEndDate,pageNumber,pageSize);
 
             }
             catch (Exception)
             {
 
-                throw new ApplicationException("Có lỗi xảy ra khi gọi danh sách bài viết");
+                throw ;
             }
         }
 
-        public bool Addgallery(GalleryDTO model, int currentUserId)
+        public void Addgallery(GalleryDTO model, int currentUserId)
         {
             try
             {
                 var result = _galleryRepo.GetGalleryByName(model.GalleryName);
                 var imageUrl = UploadHandler.Upload(model.ImageUrl);
-                if (result == true)
-                {
-                    return false;
-                }
                 var gallery = new Gallery
                 {
                    ImageUrl = imageUrl,
@@ -64,7 +71,28 @@ namespace DigitalProject.Services.Implements
                     PosterId = currentUserId,
                 };
                 _galleryRepo.CreateGallery(gallery);
-                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public bool Editgallery(GalleryDTO model, int galleryId)
+        {
+            try
+            {
+
+                var gallery = _galleryRepo.GetGalleryById(galleryId);
+                if (gallery == null) return false;
+                UploadHandler.DeleteFile(gallery.ImageUrl);
+                gallery.ImageUrl = UploadHandler.Upload(model.ImageUrl);
+                gallery.GalleryName = model.GalleryName;
+                gallery.Address = model.Address;
+                gallery.Displayorder = model.Displayorder;
+                gallery.CreateAt = DateTime.Now;
+
+                return _galleryRepo.Editgallery(gallery);
             }
             catch (Exception)
             {
@@ -73,27 +101,19 @@ namespace DigitalProject.Services.Implements
             }
 
         }
-        public bool Editgallery(GalleryDTO model, int galleryId)
+        public void Deletegallery(int galleryId)
         {
+            try
+            {
+                var gallery = _galleryRepo.GetGalleryById(galleryId);
+                _galleryRepo.Deletegallery(gallery);
+            }
+            catch (Exception)
+            {
 
-            var gallery = _galleryRepo.GetGalleryById(galleryId);
-            if (gallery == null) return false;
-            UploadHandler.DeleteFile(gallery.ImageUrl);
-
-           gallery.ImageUrl = UploadHandler.Upload(model.ImageUrl);
-            gallery.GalleryName = model.GalleryName;
-            gallery.Address = model.Address;
-            gallery.Displayorder = model.Displayorder;
-            gallery.CreateAt = DateTime.Now;
-
-            return _galleryRepo.Editgallery(gallery);
-        }
-        public bool Deletegallery(int galleryId)
-        {
-            var gallery = _galleryRepo.GetGalleryById(galleryId);
-            if (gallery == null) return false;
-            _galleryRepo.Deletegallery(gallery);
-            return true;
+                throw;
+            }
+            
         }
     }
 }

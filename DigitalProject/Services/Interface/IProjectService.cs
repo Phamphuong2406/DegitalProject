@@ -1,14 +1,15 @@
-﻿using DigitalProject.Entitys;
+﻿using DigitalProject.Common.Paging;
+using DigitalProject.Entitys;
 using DigitalProject.Models.Project;
 
 namespace DigitalProject.Services.Interface
 {
     public interface IProjectService
     {
-        List<Project> GetListProject();
-        List<Project> getListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate = null, DateTime? postingEndDate = null);
+        List<ProjectDTO> GetListProject();
+        PagingModel<ProjectDTO> getListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate , DateTime? postingEndDate , int pageNumber, int pageSize);
         Project getByProjectId(int projectId);
-        bool AddProject(ProjectDTO model, int currentUserId);
+        void AddProject(ProjectDTO model, int currentUserId);
         bool EditProject(ProjectDTO model, int projectId);
         bool DeleteProject(int projectId);
     }

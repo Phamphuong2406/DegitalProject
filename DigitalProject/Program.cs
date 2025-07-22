@@ -63,6 +63,7 @@ builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 builder.Services.AddTransient<IProjectService, ProjectService>();
 builder.Services.AddTransient<IGalleryRepository, GalleryRepository>();
 builder.Services.AddTransient<IGalleryService, GalleryService>();
+builder.Services.AddTransient<IValidatorService, ValidatorService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

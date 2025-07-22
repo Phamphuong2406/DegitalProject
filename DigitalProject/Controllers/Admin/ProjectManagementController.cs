@@ -27,59 +27,66 @@ namespace DigitalProject.Controllers.Admin
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "Lỗi " + ex.Message });
+                return BadRequest(new { message = ex.Message });
             }
         }
 
         [HttpGet("{id}")]
         public IActionResult GetByProjectId(int id)
         {
-            var user = _projectService.getByProjectId(id);
-            if (user == null)
+            try
             {
-                return NotFound("Dự án không tồn tại");
+                var user = _projectService.getByProjectId(id);
+                return Ok(user);
             }
-            return Ok(user);
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
         [HttpPost]
         [Authorize]
         public IActionResult CreateNewProject(ProjectDTO model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
                 int currentUserId = Convert.ToInt32(claimsIdentity.FindFirst(ClaimTypes.PrimarySid)?.Value);
-                var result = _projectService.AddProject(model, currentUserId);
-                if (!result) return BadRequest("Dự án đã tồn tại vui lòng nhập lại thông tin!");
+                _projectService.AddProject(model, currentUserId);
                 return Ok("Thêm mới dự án thành công ");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return BadRequest(new { message = ex.Message });
             }
 
         }
         [HttpPut]
         public IActionResult UpdateProject(ProjectDTO dto, int id) {
-            var result = _projectService.EditProject(dto, id);
-            if (!result)
-                return NotFound("Dự án không tồn tại");
-
-            return Ok("Cập nhật dự án thành công");
-
+            try
+            {
+                var result = _projectService.EditProject(dto, id);
+                return Ok("Cập nhật dự án thành công");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
      
         [HttpDelete("{id}")]
         public IActionResult DeleteProject(int id)
         {
-            var result = _projectService.DeleteProject(id);
-            if (result == false) return NotFound("Dự án không tồn tại");
-            return Ok("Xóa dự án thành công");
 
+            try
+            {
+                var result = _projectService.DeleteProject(id);
+                return Ok("Xóa dự án thành công");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
         [HttpGet]
         [Route("SearchByKey")]
@@ -87,25 +94,11 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                
-                var data = _projectService.getListProjectByKeyword(key, structuralEngineer, postingStartDate, postingEndDate);
-                int totalRecords = data.Count();
-                var pagedData = data
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToList();
-
-                return Ok(new PagingModel<Project>
-                {
-                    TotalRecords = totalRecords,
-                    PageNumber = pageNumber,
-                    PageSize = pageSize,
-                    Data = pagedData
-                });
+                return Ok(_projectService.getListProjectByKeyword(key, structuralEngineer, postingStartDate, postingEndDate, pageNumber, pageSize));
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = "Lỗi " + ex.Message });
+                return BadRequest(new { message = ex.Message });
             }
 
         }
