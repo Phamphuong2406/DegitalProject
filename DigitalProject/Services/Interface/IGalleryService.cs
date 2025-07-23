@@ -6,13 +6,13 @@ namespace DigitalProject.Services.Interface
 {
     public interface IGalleryService
     {
-        List<Gallery> GetListgallery();
+        List<Gallery> GetListGallery();
 
-        Gallery? getBygalleryId(int galleryId);
-        PagingModel<GetGalleryDTO> getListGalleryByKeyword(string? address, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize);
-        void Addgallery(GalleryDTO model, int currentUserId);
-        bool Editgallery(GalleryDTO model, int galleryId);
-        void Deletegallery(int galleryId);
+        Gallery? GetByGalleryId(int galleryId);
+        PagingModel<GetGalleryDTO> GetListGalleryByKeyword(string? address, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize);
+        void AddGallery(GalleryDTO model, int currentUserId);
+        void EditGallery(GalleryDTO model, int galleryId);
+        void DeleteGallery(int galleryId);
         
     }
 }

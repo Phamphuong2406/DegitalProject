@@ -2,7 +2,7 @@
 {
     public class Gallery
     {
-        public int PalleryId { get; set; }
+        public int GalleryId { get; set; }
         public string ImageUrl { get; set; }
         public string GalleryName { get; set; }
         public string Address { get; set; }

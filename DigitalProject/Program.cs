@@ -64,6 +64,10 @@ builder.Services.AddTransient<IProjectService, ProjectService>();
 builder.Services.AddTransient<IGalleryRepository, GalleryRepository>();
 builder.Services.AddTransient<IGalleryService, GalleryService>();
 builder.Services.AddTransient<IValidatorService, ValidatorService>();
+builder.Services.AddTransient<IContactRequestService, ContactRequestService>();
+builder.Services.AddTransient<IContactRequestRepository, ContactRequestRepository>();
+builder.Services.AddTransient<ISettingService, SettingService>();
+builder.Services.AddTransient<ISettingRepository, SettingRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

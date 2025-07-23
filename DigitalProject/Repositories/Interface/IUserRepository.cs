@@ -6,13 +6,13 @@ namespace DigitalProject.Repositories.Interface
 {
     public interface IUserRepository
     {
-        List<User> getListUser();
-        User GetByEmail(string email);
+        List<User> GetListUser();
+        User FindByEmail(string email);
         void AddUser(User user);
-        User GetUserById(int id);
-        bool EditUser(User model);
+        User FindById(int id);
+        void UpdateRefreshToken(int idUser, string refreshToken, DateTime refreshTokenExprired);
+        void EditUser(User model);
         void DeleteUser(User model);
-        bool UpdateRefreshToken(int idUser, string refreshToken, string refreshTokenExprired);
         PagingModel<UserDTO> GetUserByKey(string? key, bool IsActive, int pageNumber, int pageSize);
     }
 }

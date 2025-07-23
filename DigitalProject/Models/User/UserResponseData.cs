@@ -31,7 +31,7 @@
     public class AccountUpdateRefeshTokenRequestData 
     {
         public int Id { get; set; }
-        public string? RefreshToken { get; set; } = null!;
-        public DateTime? RefreshTokenExprired { get; set; }
+        public string RefreshToken { get; set; } 
+        public DateTime RefreshTokenExprired { get; set; }
     }
 }

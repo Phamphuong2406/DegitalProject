@@ -7,10 +7,10 @@ namespace DigitalProject.Services.Interface
     public interface IProjectService
     {
         List<ProjectDTO> GetListProject();
-        PagingModel<ProjectDTO> getListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate , DateTime? postingEndDate , int pageNumber, int pageSize);
-        Project getByProjectId(int projectId);
+        PagingModel<ProjectDTO> GetListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate , DateTime? postingEndDate , int pageNumber, int pageSize);
+        Project GetByProjectId(int projectId);
         void AddProject(ProjectDTO model, int currentUserId);
-        bool EditProject(ProjectDTO model, int projectId);
-        bool DeleteProject(int projectId);
+        void EditProject(ProjectDTO model, int projectId);
+        void DeleteProject(int projectId);
     }
 }

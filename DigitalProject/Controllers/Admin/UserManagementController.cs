@@ -1,6 +1,4 @@
-﻿using DigitalProject.Common.Paging;
-using DigitalProject.Entitys;
-using DigitalProject.Models.User;
+﻿using DigitalProject.Models.User;
 using DigitalProject.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +33,7 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                return Ok(_userService.getByUserId(id));
+                return Ok(_userService.GetByUserId(id));
             }
             catch (Exception ex)
             {

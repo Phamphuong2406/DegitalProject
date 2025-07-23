@@ -14,12 +14,14 @@ namespace DigitalProject.Entitys
         public virtual DbSet<UserRole> userRoles { get; set; }
         public virtual DbSet<Project> projects { get; set; }
         public virtual DbSet<Gallery> galleries { get; set; }
+        public virtual DbSet<ContactRequest> contactRequests { get; set; }
+        public virtual DbSet<Setting> settings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)// Fluent API (Application Programming Interface)
 
         {
             base.OnModelCreating(modelBuilder);
 
-            // User
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("Users");
@@ -71,10 +73,13 @@ namespace DigitalProject.Entitys
                     .WithOne(ur => ur.users)
                     .HasForeignKey(ur => ur.PosterId)
                     .OnDelete(DeleteBehavior.Cascade);
-
+                entity.HasMany(u => u.contactRequests)
+                .WithOne(ur => ur.users)
+                .HasForeignKey(u => u.RespondentId)
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // Role
+
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.ToTable("Roles");
@@ -92,13 +97,11 @@ namespace DigitalProject.Entitys
 
             });
 
-            // UserRole: bảng trung gian many-to-many
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.ToTable("UserRoles");
 
-                entity.HasKey(ur => new { ur.UserId, ur.RoleId }); // Composite key
-
+                entity.HasKey(ur => new { ur.UserId, ur.RoleId }); 
                 entity.HasOne(ur => ur.users)
                       .WithMany(u => u.userRoles)
                       .HasForeignKey(ur => ur.UserId);
@@ -135,7 +138,7 @@ namespace DigitalProject.Entitys
             modelBuilder.Entity<Gallery>(entity =>
             {
                 entity.ToTable("Gallerys");
-                entity.HasKey(r => r.PalleryId);
+                entity.HasKey(r => r.GalleryId);
 
                 entity.Property(u => u.GalleryName)
                .IsRequired()
@@ -143,6 +146,38 @@ namespace DigitalProject.Entitys
                 entity.Property(u => u.Address)
                 .HasMaxLength(255);
             });
+
+            modelBuilder.Entity<ContactRequest>(entity =>
+            {
+                entity.ToTable("ContactRequests");
+                entity.HasKey(u => u.RequestId);
+
+                entity.Property(u => u.CustommerName)
+              .IsRequired()
+              .HasMaxLength(100);
+                entity.Property(u => u.CustomerPhoneNumber)
+              .IsRequired()
+              .HasMaxLength(20);
+                entity.Property(u => u.CustomerEmail)
+              .IsRequired()
+              .HasMaxLength(50);
+                entity.Property(u => u.CustomerMessage)
+              .HasMaxLength(255);
+                entity.Property(u => u.Note)
+              .HasMaxLength(255);
+            });
+            modelBuilder.Entity<Setting>(entity =>
+            {
+                entity.ToTable("Settings");
+                entity.HasKey(u => u.Id);
+
+                entity.Property(u => u.Key)
+                .IsRequired()
+                .HasMaxLength(100);
+                entity.Property(u => u.Value)
+                .HasMaxLength(255);
+
+            } );
         }
     }
 }

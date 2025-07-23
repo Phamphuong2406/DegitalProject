@@ -16,21 +16,20 @@ namespace Digitalgallery.Repositories.Implements
             _context = context;
             _mapper = mapper;
         }
-        public List<Gallery> getListGallery()
+        public List<Gallery> GetListGallery()
         {
             return _context.galleries.ToList();
         }
-       public Gallery? GetGalleryById(int galleryId)
+       public Gallery? FindById(int galleryId)
         {
-            return _context.galleries.FirstOrDefault(x => x.PalleryId == galleryId);
+            return _context.galleries.FirstOrDefault(x => x.GalleryId == galleryId);
            
         }
-        public bool GetGalleryByName(string galleryName)
+        public void FindByName(string galleryName)
         {
-            var gallery = _context.galleries.FirstOrDefault(x => x.GalleryName == galleryName);
-            return gallery != null;
+            _context.galleries.FirstOrDefault(x => x.GalleryName == galleryName);
         }
-        public PagingModel<GetGalleryDTO> getListGalleryByKey(string? address, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize)
+        public PagingModel<GetGalleryDTO> GetListGalleryByKey(string? address, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize)
         {
             var query = _context.galleries.AsQueryable();
             if (!string.IsNullOrEmpty(address))
@@ -67,13 +66,12 @@ namespace Digitalgallery.Repositories.Implements
             _context.SaveChanges();
 
         }
-        public bool Editgallery(Gallery gallery)
+        public void EditGallery(Gallery gallery)
         {
             _context.galleries.Update(gallery);
-            var result = _context.SaveChanges();
-            return result > 0;
+             _context.SaveChanges();
         }
-        public void Deletegallery(Gallery model)
+        public void DeleteGallery(Gallery model)
         {
             _context.galleries.Remove(model);
             _context.SaveChanges();

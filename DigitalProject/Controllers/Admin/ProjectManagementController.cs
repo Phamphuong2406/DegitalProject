@@ -1,6 +1,4 @@
 ﻿using DigitalProject.Common.Filter;
-using DigitalProject.Common.Paging;
-using DigitalProject.Entitys;
 using DigitalProject.Models.Project;
 using DigitalProject.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +34,7 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                var user = _projectService.getByProjectId(id);
+                var user = _projectService.GetByProjectId(id);
                 return Ok(user);
             }
             catch (Exception ex)
@@ -65,7 +63,7 @@ namespace DigitalProject.Controllers.Admin
         public IActionResult UpdateProject(ProjectDTO dto, int id) {
             try
             {
-                var result = _projectService.EditProject(dto, id);
+                _projectService.EditProject(dto, id);
                 return Ok("Cập nhật dự án thành công");
             }
             catch (Exception ex)
@@ -80,7 +78,7 @@ namespace DigitalProject.Controllers.Admin
 
             try
             {
-                var result = _projectService.DeleteProject(id);
+                _projectService.DeleteProject(id);
                 return Ok("Xóa dự án thành công");
             }
             catch (Exception ex)
@@ -94,7 +92,7 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                return Ok(_projectService.getListProjectByKeyword(key, structuralEngineer, postingStartDate, postingEndDate, pageNumber, pageSize));
+                return Ok(_projectService.GetListProjectByKeyword(key, structuralEngineer, postingStartDate, postingEndDate, pageNumber, pageSize));
             }
             catch (Exception ex)
             {

@@ -22,7 +22,7 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                return Ok(_galleryService.GetListgallery());
+                return Ok(_galleryService.GetListGallery());
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                var user = _galleryService.getBygalleryId(id);
+                var user = _galleryService.GetByGalleryId(id);
                 return Ok(user);
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace DigitalProject.Controllers.Admin
             {
                 var claimsIdentity = this.User.Identity as ClaimsIdentity;
                 int currentUserId = Convert.ToInt32(claimsIdentity.FindFirst(ClaimTypes.PrimarySid)?.Value);
-               _galleryService.Addgallery(model, currentUserId);
+               _galleryService.AddGallery(model, currentUserId);
                 return Ok("Thêm mới địa điểm thành công ");
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                var result = _galleryService.Editgallery(dto, id);
+                _galleryService.EditGallery(dto, id);
                 return Ok("Cập nhật địa điểm thành công");
             }
             catch (Exception ex)
@@ -82,7 +82,7 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-                _galleryService.Deletegallery(id);
+                _galleryService.DeleteGallery(id);
                 return Ok("Xóa địa điểm thành công");
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace DigitalProject.Controllers.Admin
         {
             try
             {
-               return Ok(_galleryService.getListGalleryByKeyword(address, postingStartDate, postingEndDate, pageNumber, pageSize));
+               return Ok(_galleryService.GetListGalleryByKeyword(address, postingStartDate, postingEndDate, pageNumber, pageSize));
             }
             catch (Exception ex)
             {

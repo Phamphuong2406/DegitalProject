@@ -19,13 +19,13 @@ namespace DigitalProject.Services.Implements
             _logger = logger;
             _mapper = mapper;
             _validatorService = validatorService;
-                }
+        }
 
-        public User getUserById(int userId)
+        public User GetUserById(int userId)
         {
             try
             {
-                return _userRepo.GetUserById(userId);
+                return _userRepo.FindById(userId);
             }
             catch (Exception)
             {
@@ -36,7 +36,7 @@ namespace DigitalProject.Services.Implements
         {
             try
             {
-                var result = _userRepo.getListUser();
+                var result = _userRepo.GetListUser();
                 return _mapper.Map<List<UserDTO>>(result);//map entity => DTO
             }
             catch (Exception)
@@ -45,11 +45,11 @@ namespace DigitalProject.Services.Implements
                 throw;
             }
         }
-        public UserDTO getByUserId(int userId)
+        public UserDTO GetByUserId(int userId)
         {
             try
             {
-                var user = _userRepo.GetUserById(userId);
+                var user = _userRepo.FindById(userId);
                 return _mapper.Map<UserDTO>(user);
             }
             catch (Exception)
@@ -58,13 +58,13 @@ namespace DigitalProject.Services.Implements
             }
 
         }
-        public bool CreateUser(UserRequestData ModelDto)
+        public bool CreateUser(UserRequestData modelDto)
         {
             try
             {
-                var userExist = _userRepo.GetByEmail(ModelDto.Email);
-                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(ModelDto.Password);
-                var user = _mapper.Map<User>(ModelDto);
+                var userExist = _userRepo.FindByEmail(modelDto.Email);
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(modelDto.Password);
+                var user = _mapper.Map<User>(modelDto);
                 user.HashedPassword = hashedPassword;
                 user.IsActive = true;
                 _userRepo.AddUser(user);
@@ -75,17 +75,17 @@ namespace DigitalProject.Services.Implements
                 throw;
             }
         }
-        public bool EditUser(UserRequestData Dto, int userId)
+        public void EditUser(UserRequestData Dto, int userId)
         {
             try
             {
-                var user = _userRepo.GetUserById(userId);
+                var user = _userRepo.FindById(userId);
                 user.UserName = Dto.UserName;
                 user.Email = Dto.Email;
                 user.PhoneNumber = Dto.PhoneNumber;
                 user.note = Dto.note;
                 user.IsActive = Dto.IsActive;
-                return _userRepo.EditUser(user);
+                _userRepo.EditUser(user);
             }
             catch (Exception)
             {
@@ -97,7 +97,7 @@ namespace DigitalProject.Services.Implements
         {
             try
             {
-                var user = _userRepo.GetUserById(userId);
+                var user = _userRepo.FindById(userId);
                 _userRepo.DeleteUser(user);
             }
             catch (Exception)
@@ -124,7 +124,7 @@ namespace DigitalProject.Services.Implements
         {
             try
             {
-                var user_db = _userRepo.GetByEmail(data.Email);
+                var user_db = _userRepo.FindByEmail(data.Email);
                 bool isPasswordMatch = BCrypt.Net.BCrypt.Verify(data.Password, user_db.HashedPassword);
                 return _mapper.Map<ClaimCreationData>(user_db);
 
@@ -134,20 +134,15 @@ namespace DigitalProject.Services.Implements
                 throw;
             }
         }
-        public bool AccountUpdateRefreshToken(AccountUpdateRefeshTokenRequestData tokenRequestData)
+        public void AccountUpdateRefreshToken(AccountUpdateRefeshTokenRequestData tokenRequestData)
         {
             //nếu đăng nhập thành công thì taọ refeshtoken
             try
             {
-                var user = _userRepo.GetUserById(tokenRequestData.Id);
-                if (user != null)
-                {
-                    user.RefreshToken = tokenRequestData.RefreshToken;
-                    user.RefreshTokenExpired = tokenRequestData.RefreshTokenExprired;
-                    _userRepo.UpdateRefreshToken(tokenRequestData.Id, tokenRequestData.RefreshToken,tokenRequestData.RefreshTokenExprired);
-                    return true;
-                }
-                return false;
+                var user = _userRepo.FindById(tokenRequestData.Id);
+                user.RefreshToken = tokenRequestData.RefreshToken;
+                user.RefreshTokenExpired = tokenRequestData.RefreshTokenExprired;
+                _userRepo.UpdateRefreshToken(tokenRequestData.Id, tokenRequestData.RefreshToken, tokenRequestData.RefreshTokenExprired);
             }
             catch (Exception)
             { throw; }

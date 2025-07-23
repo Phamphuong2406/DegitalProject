@@ -19,7 +19,7 @@ namespace DigitalProject.Services.Implements
         {
             try
             {
-                var data = _projectRepo.getListProject();
+                var data = _projectRepo.GetListProject();
                 return _mapper.Map<List<ProjectDTO>>(data);
             }
             catch (Exception)
@@ -28,23 +28,23 @@ namespace DigitalProject.Services.Implements
             }
          
         }
-        public PagingModel<ProjectDTO> getListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate , DateTime? postingEndDate, int pageNumber, int pageSize)
+        public PagingModel<ProjectDTO> GetListProjectByKeyword(string? key, string? structuralEngineer, DateTime? postingStartDate , DateTime? postingEndDate, int pageNumber, int pageSize)
         {
             try
             {
-                return _projectRepo.getListProjectByKey(key, structuralEngineer, postingStartDate, postingEndDate, pageNumber, pageSize);
+                return _projectRepo.GetListProjectByKey(key, structuralEngineer, postingStartDate, postingEndDate, pageNumber, pageSize);
             }
             catch (Exception)
             {
 
-                throw new ApplicationException("Có lỗi xảy ra khi gọi danh sách bài viết");
+                throw ;
             }
         }
-        public Project getByProjectId(int projectId)
+        public Project GetByProjectId(int projectId)
         {
             try
             {
-                return _projectRepo.GetProjectById(projectId);
+                return _projectRepo.FindById(projectId);
             }
             catch (Exception)
             {
@@ -55,7 +55,7 @@ namespace DigitalProject.Services.Implements
         {
             try
             {
-                var result = _projectRepo.GetProjectByName(model.ProjectName);
+                var result = _projectRepo.FindByName(model.ProjectName);
                
                 var project = _mapper.Map<Project>(model);
                 project.IdPoster = currentUserId;
@@ -68,11 +68,11 @@ namespace DigitalProject.Services.Implements
             }
 
         }
-        public bool EditProject(ProjectDTO model, int projectId)
+        public void EditProject(ProjectDTO model, int projectId)
         {
             try
             {
-                var project = _projectRepo.GetProjectById(projectId);
+                var project = _projectRepo.FindById(projectId);
                 project.ProjectName = model.ProjectName;
                 project.ProjectType = model.ProjectType;
                 project.ImageUrl = model.ImageUrl;
@@ -89,7 +89,7 @@ namespace DigitalProject.Services.Implements
                 project.DisplayOrderOnHome = model.DisplayOrderOnHome;
                 project.ExpirationTimeOnHeader = model.ExpirationTimeOnHeader;
 
-                return _projectRepo.EditProject(project);
+                _projectRepo.EditProject(project);
             }
             catch (Exception)
             {
@@ -98,17 +98,15 @@ namespace DigitalProject.Services.Implements
             }
            
         }
-        public bool DeleteProject(int projectId)
+        public void DeleteProject(int projectId)
         {
             try
             {
-                var project = _projectRepo.GetProjectById(projectId);
+                var project = _projectRepo.FindById(projectId);
                 _projectRepo.DeleteProject(project);
-                return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
           

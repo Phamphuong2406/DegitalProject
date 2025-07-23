@@ -20,5 +20,6 @@ namespace DigitalProject.Entitys
         public ICollection<UserRole> userRoles { get; set; }
         public ICollection<Project> projects { get; set; }
         public ICollection<Gallery> galleries { get; set; }
+        public ICollection<ContactRequest> contactRequests { get; set; }
     }
 }

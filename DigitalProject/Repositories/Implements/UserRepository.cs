@@ -15,7 +15,7 @@ namespace DigitalProject.Repositories.Implements
             _context = context;
             _mapper = mapper;
         }
-        public List<User> getListUser()
+        public List<User> GetListUser()
         {
             return _context.users.ToList();
         }
@@ -24,28 +24,27 @@ namespace DigitalProject.Repositories.Implements
             _context.users.Add(model);
             _context.SaveChanges();
         }
-        public User GetByEmail(string email)
+        public User FindByEmail(string email)
         {
             return _context.users.FirstOrDefault(x => x.Email == email);
 
         }
-        public User GetUserById(int id)
+        public User FindById(int id)
         {
             return _context.users.FirstOrDefault(x => x.UserId == id);
 
         }
-        public bool EditUser(User model)
+        public void EditUser(User model)
         {
             _context.users.Update(model);
-            var result = _context.SaveChanges();
-            return result > 0;
+           _context.SaveChanges();
         }
-        public bool UpdateRefreshToken(int idUser, string refreshToken, string refreshTokenExprired)
+        public void UpdateRefreshToken(int idUser, string refreshToken, DateTime refreshTokenExprired)
         {
-            GetUserById(idUser);
-            _context.users.Update(model);
-            var result = _context.SaveChanges();
-            return result > 0;
+            var userUpdate = FindById(idUser);
+            userUpdate.RefreshToken = refreshToken;
+            userUpdate.RefreshTokenExpired = refreshTokenExprired;
+            _context.SaveChanges();
         }
         public void DeleteUser(User model)
         {
@@ -64,12 +63,12 @@ namespace DigitalProject.Repositories.Implements
             var pagedData = query.Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
-            var Data = _mapper.Map<List<UserDTO>>(pagedData);
+            var data = _mapper.Map<List<UserDTO>>(pagedData);
             return new PagingModel<UserDTO>
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                Data = Data,
+                Data = data,
                 TotalRecords = totalRecords
             };
         }

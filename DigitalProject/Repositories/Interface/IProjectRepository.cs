@@ -6,12 +6,12 @@ namespace DigitalProject.Repositories.Interface
 {
     public interface IProjectRepository
     {
-         List<Project> getListProject();
-        PagingModel<ProjectDTO> getListProjectByKey(string? key, string? structuralEngineer, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize);
-        Project? GetProjectById(int projectId);
-        bool GetProjectByName(string ProjectName);
+         List<Project> GetListProject();
+        PagingModel<ProjectDTO> GetListProjectByKey(string? key, string? structuralEngineer, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize);
+        Project? FindById(int projectId);
+        bool FindByName(string ProjectName);
         void CreateProject(Project project);
-        bool EditProject(Project project);
+        void EditProject(Project project);
         void DeleteProject(Project model);
     }
 }

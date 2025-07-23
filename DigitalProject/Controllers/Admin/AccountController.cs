@@ -43,8 +43,9 @@ namespace DigitalProject.Controllers.Admin
             var token = new JwtSecurityTokenHandler().WriteToken(newAccessToken);
             var refreshToken = GenerateRefreshToken();
             var expired = _configuration["JWT:RefeshTokenValidityInDays"] ?? "";
-            var result_update = _userService.AccountUpdateRefreshToken(new AccountUpdateRefeshTokenRequestData
+            _userService.AccountUpdateRefreshToken(new AccountUpdateRefeshTokenRequestData
             {
+                Id = user_login.UserId,
                 RefreshToken = refreshToken,
                 RefreshTokenExprired = DateTime.Now.AddDays(Convert.ToInt32(expired))
             });

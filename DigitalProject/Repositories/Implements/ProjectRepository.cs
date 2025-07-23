@@ -18,11 +18,11 @@ namespace DigitalProject.Repositories.Implements
             _context = context;
             _mapper = mapper;
         }
-        public List<Project> getListProject()
+        public List<Project> GetListProject()
         {
             return _context.projects.ToList();
         }
-        public PagingModel<ProjectDTO> getListProjectByKey(string? key, string? structuralEngineer, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize)
+        public PagingModel<ProjectDTO> GetListProjectByKey(string? key, string? structuralEngineer, DateTime? postingStartDate, DateTime? postingEndDate, int pageNumber, int pageSize)
         {
             var query = _context.projects.AsQueryable();
 
@@ -60,14 +60,14 @@ namespace DigitalProject.Repositories.Implements
                 TotalRecords = totalRecords
             };
         }
-        public Project? GetProjectById(int projectId)
+        public Project? FindById(int projectId)
         {
             return _context.projects.FirstOrDefault(x => x.ProjectId == projectId);
         }
-        public bool GetProjectByName(string ProjectName)
+        public bool FindByName(string ProjectName)
         {
             var project = _context.projects.FirstOrDefault(x => x.ProjectName == ProjectName);
-            return project != null;
+            return true;
         }
         public void CreateProject(Project project)
         {
@@ -75,11 +75,10 @@ namespace DigitalProject.Repositories.Implements
             _context.SaveChanges();
 
         }
-        public bool EditProject(Project project)
+        public void EditProject(Project project)
         {
             _context.projects.Update(project);
-            var result = _context.SaveChanges();
-            return result >0;
+             _context.SaveChanges();
         }
         public void DeleteProject(Project model)
         {
